@@ -21,7 +21,7 @@ import { useState } from 'react';
 //   sendEmailVerification,
 // } from 'firebase/auth';
 // import { auth } from '../Api/firebase-config';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { AuthContext } from '../AuthContext/AuthContext';
 
 function Copyright(props) {
@@ -34,7 +34,7 @@ function Copyright(props) {
     >
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Agro App
+        Check in with QR code
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -44,15 +44,17 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Admin() {
+export default function Employee() {
   // const ctx = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    navigate('Pages/EmployeeAccount');
     // signInWithEmailAndPassword(auth, email, password)
     //   .then((response) => {
     //     if (auth.currentUser.emailVerified) {
@@ -86,14 +88,14 @@ export default function Admin() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 0,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
           }}
         >
           <Typography component="h1" variant="h5">
-            Ingreso para Administrador
+            Ingreso para Empleado
           </Typography>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />

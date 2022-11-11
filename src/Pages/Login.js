@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Admin from './Admin';
+import Admin from './LoginAdmin';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -44,10 +44,10 @@ function Login(props) {
         disablePadding
         color="primary"
         component={Link}
-        to={'/Pages/Admin'}
+        to={'/Pages/LoginAdmin'}
       >
         <ListItemIcon>
-          <IconButton color="primary" component={Link} to={'/Pages/Admin'}>
+          <IconButton color="primary" component={Link} to={'/Pages/LoginAdmin'}>
             <EngineeringIcon />
           </IconButton>
           Administrador
@@ -55,10 +55,18 @@ function Login(props) {
         </ListItemIcon>
       </ListItemButton>
       <Divider />
-      <ListItemButton color="primary" component={Link} to={'/Pages/Employee'}>
+      <ListItemButton
+        color="primary"
+        component={Link}
+        to={'/Pages/LoginEmployee'}
+      >
         <ListItemIcon disablePadding>
           <Divider />
-          <IconButton color="primary" component={Link} to={'/Pages/Employee'}>
+          <IconButton
+            color="primary"
+            component={Link}
+            to={'/Pages/LoginEmployee'}
+          >
             <SupervisorAccountIcon />
           </IconButton>
           Empleado
