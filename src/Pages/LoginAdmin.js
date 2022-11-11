@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,6 +25,9 @@ import { useNavigate } from 'react-router-dom';
 import { Context } from '../Pages/Context';
 
 function Copyright(props) {
+  // const navigate = useNavigate();
+  // const ctx = useContext(Context);
+
   return (
     <Typography
       variant="body2"
@@ -51,9 +54,14 @@ export default function Admin() {
 
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   navigate('/Pages/AdminAccount');
+  //   ctx.currentUser = 1;
+  // }, [ctx, navigate]);
+
   const handleSubmit = (event) => {
-    // event.preventDefault();
-    // ctx.updateUser();
+    event.preventDefault();
+    ctx.currentUser = 1;
     console.log(ctx.currentUser);
     navigate('/Pages/AdminAccount');
     // signInWithEmailAndPassword(auth, email, password)

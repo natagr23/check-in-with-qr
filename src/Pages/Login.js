@@ -16,7 +16,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import { Tabs, Tab, Button } from '@mui/material';
 import { Context } from '../Pages/Context';
-
+import { useNavigate } from 'react-router-dom';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -26,11 +26,28 @@ const drawerWidth = 240;
 
 function Login(props) {
   const ctx = useContext(Context);
+  const navigate = useNavigate();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleGo = (event) => {
+    event.preventDefault();
+
+    ctx.currentUser = 1;
+    console.log(ctx.currentUser);
+    navigate('/Pages/LoginAdmin');
+  };
+
+  const handleGoEmployee = (event) => {
+    event.preventDefault();
+
+    ctx.currentUser = 1;
+    console.log(ctx.currentUser);
+    navigate('/Pages/LoginEmployee');
   };
 
   const drawer = (
@@ -41,10 +58,10 @@ function Login(props) {
         disablePadding
         color="primary"
         component={Link}
-        to={'/Pages/LoginAdmin'}
+        onClick={handleGo}
       >
         <ListItemIcon>
-          <IconButton color="primary" component={Link} to={'/Pages/LoginAdmin'}>
+          <IconButton color="primary" component={Link} onClick={handleGo}>
             <EngineeringIcon />
           </IconButton>
           Administrador
@@ -55,14 +72,14 @@ function Login(props) {
       <ListItemButton
         color="primary"
         component={Link}
-        to={'/Pages/LoginEmployee'}
+        onClick={handleGoEmployee}
       >
         <ListItemIcon disablePadding>
           <Divider />
           <IconButton
             color="primary"
             component={Link}
-            to={'/Pages/LoginEmployee'}
+            onClick={handleGoEmployee}
           >
             <SupervisorAccountIcon />
           </IconButton>
@@ -116,7 +133,7 @@ function Login(props) {
             </Typography> */}
             </Tabs>
           )}
-          {!ctx.currentUser && (
+          {ctx.currentUser === 2 && (
             <Button
               sx={{ marginLeft: '10px' }}
               variant="contained"
@@ -125,22 +142,20 @@ function Login(props) {
               to={'/'}
               // value={value}
             >
-              My QR{''}
+              Read QR{''}
             </Button>
-            // <Tabs
-            //   sx={{ marginLeft: 'auto' }}
-            //   textColor="inherit"
-            //   // onChange={handleTabChange}
-            //   indicatorColor="secondary"
-            //   // value={value}
-            // >
-            //   <Tab
-            //     label="Portal"
-            //     component={Link}
-            //     to={'/'}
-            //     // value={value}
-            //   />
-            // </Tabs>
+          )}
+          {ctx.currentUser === 3 && (
+            <Button
+              sx={{ marginLeft: '10px' }}
+              variant="contained"
+              label="My Products"
+              component={Link}
+              to={'/'}
+              // value={value}
+            >
+              Generate QR{''}
+            </Button>
           )}
         </Toolbar>
       </AppBar>

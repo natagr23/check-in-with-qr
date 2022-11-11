@@ -9,13 +9,13 @@ export default function AdminAccount() {
   let navigate = useNavigate();
   const handleLogout = () => {
     navigate('/');
-    // ctx.currentUser = null;
+    ctx.currentUser = 1;
   };
   // const ctx = useContext(AuthContext);
 
   useEffect(() => {
     navigate('/Pages/AdminAccount');
-    ctx.updateUser();
+    ctx.currentUser = 2;
   }, [ctx, navigate]);
   return (
     <>

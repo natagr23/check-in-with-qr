@@ -26,7 +26,11 @@ function App() {
             <Route path="/Pages/LoginEmployee" element={[<LoginEmployee />]} />
             <Route path="/Pages/AdminAccount" element={[<AdminAccount />]} />
             <Route
-              path="/Pages/LoginEmployee/Pages/EmployeeAccount"
+              path="/Pages/EmployeeAccount"
+              element={[<EmployeeAccount />]}
+            />
+            <Route
+              path="Pages/LoginEmployee/Pages/EmployeeAccount"
               element={[<EmployeeAccount />]}
             />
           </Routes>
