@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { Context } from '../Pages/Context';
+import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 
 export default function EmployeeAccount() {
@@ -29,7 +30,16 @@ export default function EmployeeAccount() {
       >
         <div> Account Employee</div>
         <p> Account...Employee</p>
-
+        <Button
+          sx={{ marginLeft: '10px' }}
+          variant="contained"
+          label="My Products"
+          component={Link}
+          to={'/'}
+          // value={value}
+        >
+          Generate QR{''}
+        </Button>
         <Stack direction="row" spacing={2}>
           <Button>Create Products</Button>
         </Stack>

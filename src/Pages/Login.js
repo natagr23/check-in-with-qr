@@ -11,7 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import EngineeringIcon from '@mui/icons-material/Engineering';
 import { Tabs, Tab, Button } from '@mui/material';
@@ -134,28 +134,38 @@ function Login(props) {
             </Tabs>
           )}
           {ctx.currentUser === 2 && (
-            <Button
-              sx={{ marginLeft: '10px' }}
-              variant="contained"
-              label="My Products"
-              component={Link}
-              to={'/'}
+            <Tabs
+              sx={{ marginLeft: 'auto' }}
+              textColor="inherit"
+              // onChange={handleTabChange}
+              indicatorColor="secondary"
               // value={value}
             >
-              Read QR{''}
-            </Button>
+              <EngineeringIcon />
+              <Tab
+                label="Perfil Administrador"
+                component={Link}
+
+                // value={value}
+              />
+            </Tabs>
           )}
           {ctx.currentUser === 3 && (
-            <Button
-              sx={{ marginLeft: '10px' }}
-              variant="contained"
-              label="My Products"
-              component={Link}
-              to={'/'}
+            <Tabs
+              sx={{ marginLeft: 'auto' }}
+              textColor="inherit"
+              // onChange={handleTabChange}
+              indicatorColor="secondary"
               // value={value}
             >
-              Generate QR{''}
-            </Button>
+              <SupervisorAccountIcon />
+              <Tab
+                label="Perfil Empleado"
+                component={Link}
+
+                // value={value}
+              />
+            </Tabs>
           )}
         </Toolbar>
       </AppBar>
