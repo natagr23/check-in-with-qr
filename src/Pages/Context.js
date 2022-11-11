@@ -13,6 +13,7 @@ export const ContextProvider = (props) => {
   const updateTimeActive = (timeActive) => {
     setTimeActive(() => timeActive);
   };
+
   return (
     <Context.Provider
       value={{

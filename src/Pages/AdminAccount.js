@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
 import { Context } from '../Pages/Context';
 import { styled } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
 
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -49,8 +51,9 @@ export default function AdminAccount() {
           alignItems: 'center',
         }}
       >
-        <div> Account Admin</div>
-        <p> Account...Admin</p>
+        <Typography variant="h6" noWrap component="div">
+          Sedes
+        </Typography>
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
@@ -81,14 +84,15 @@ export default function AdminAccount() {
             </Grid>
           </Grid>
         </Box>
-        <Button
-          sx={{ marginLeft: '800px' }}
-          variant="contained"
-          label="SignOut"
-          onClick={handleLogout}
-        >
-          SignOut{''}
-        </Button>
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <Stack direction="row" spacing={3}>
+          <Button variant="contained" label="SignOut" onClick={handleLogout}>
+            SignOut{''}
+          </Button>
+        </Stack>
       </Box>
     </>
   );

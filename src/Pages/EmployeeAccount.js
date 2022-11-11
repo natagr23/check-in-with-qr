@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { Context } from '../Pages/Context';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
@@ -28,8 +29,9 @@ export default function EmployeeAccount() {
           alignItems: 'center',
         }}
       >
-        <div> Account Employee</div>
-        <p> Account...Employee</p>
+        <Typography variant="h6" noWrap component="div">
+          Generar código QR
+        </Typography>
         <Button
           sx={{ marginLeft: '10px' }}
           variant="contained"
@@ -40,18 +42,17 @@ export default function EmployeeAccount() {
         >
           Generate QR{''}
         </Button>
-        <Stack direction="row" spacing={2}>
-          <Button>Create Products</Button>
+
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+        <Stack direction="row" spacing={3}>
+          <Button variant="contained" label="SignOut" onClick={handleLogout}>
+            SignOut{''}
+          </Button>
         </Stack>
       </Box>
-      <Button
-        sx={{ marginLeft: '800px' }}
-        variant="contained"
-        label="SignOut"
-        onClick={handleLogout}
-      >
-        SignOut{''}
-      </Button>
     </>
   );
 }
