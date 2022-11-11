@@ -17,8 +17,8 @@ import '@fontsource/roboto/700.css';
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <ContextProvider>
+      <ContextProvider>
+        <BrowserRouter>
           <Login />
           <Routes>
             <Route path="/" element={[<Login />, <LoginAdmin />]} />
@@ -31,8 +31,8 @@ function App() {
             />
           </Routes>
           <Outlet />
-        </ContextProvider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </ContextProvider>
     </>
   );
 }

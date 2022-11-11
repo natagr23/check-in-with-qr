@@ -22,7 +22,7 @@ import { useState } from 'react';
 // } from 'firebase/auth';
 // import { auth } from '../Api/firebase-config';
 import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../AuthContext/AuthContext';
+import { Context } from '../Pages/Context';
 
 function Copyright(props) {
   return (
@@ -45,15 +45,16 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Admin() {
-  // const ctx = useContext(AuthContext);
+  const ctx = useContext(Context);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-
+    // event.preventDefault();
+    // ctx.updateUser();
+    console.log(ctx.currentUser);
     navigate('/Pages/AdminAccount');
     // signInWithEmailAndPassword(auth, email, password)
     //   .then((response) => {

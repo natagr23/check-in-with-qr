@@ -1,6 +1,5 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Admin from './LoginAdmin';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -8,18 +7,15 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import EngineeringIcon from '@mui/icons-material/Engineering';
+import { Tabs, Tab, Button } from '@mui/material';
+import { Context } from '../Pages/Context';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -29,6 +25,7 @@ import '@fontsource/roboto/700.css';
 const drawerWidth = 240;
 
 function Login(props) {
+  const ctx = useContext(Context);
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -100,9 +97,51 @@ function Login(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Ingreso de Usuarios
-          </Typography>
+          {ctx.currentUser === 1 && (
+            <Tabs
+              sx={{ marginLeft: 'auto' }}
+              textColor="inherit"
+              // onChange={handleTabChange}
+              indicatorColor="secondary"
+              // value={value}
+            >
+              <Tab
+                label="Ingreso Usuarios"
+                component={Link}
+                to={'/'}
+                // value={value}
+              />
+              {/* <Typography variant="h6" noWrap component="div">
+              Ingreso de Usuarios
+            </Typography> */}
+            </Tabs>
+          )}
+          {!ctx.currentUser && (
+            <Button
+              sx={{ marginLeft: '10px' }}
+              variant="contained"
+              label="My Products"
+              component={Link}
+              to={'/'}
+              // value={value}
+            >
+              My QR{''}
+            </Button>
+            // <Tabs
+            //   sx={{ marginLeft: 'auto' }}
+            //   textColor="inherit"
+            //   // onChange={handleTabChange}
+            //   indicatorColor="secondary"
+            //   // value={value}
+            // >
+            //   <Tab
+            //     label="Portal"
+            //     component={Link}
+            //     to={'/'}
+            //     // value={value}
+            //   />
+            // </Tabs>
+          )}
         </Toolbar>
       </AppBar>
       <Box
