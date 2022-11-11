@@ -1,184 +1,160 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import React, { useContext } from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useState } from 'react';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+// import {
+//   signInWithEmailAndPassword,
+//   sendEmailVerification,
+// } from 'firebase/auth';
+// import { auth } from '../Api/firebase-config';
+// import { useNavigate } from 'react-router-dom';
+// import { AuthContext } from '../AuthContext/AuthContext';
 
-const drawerWidth = 240;
-
-function Admin(props) {
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
+function Copyright(props) {
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': {
-              boxSizing: 'border-box',
-              width: drawerWidth,
-            },
-          }}
-          open
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
-      </Box>
-    </Box>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {'Copyright © '}
+      <Link color="inherit" href="https://mui.com/">
+        Agro App
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
   );
 }
 
-Admin.propTypes = {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window: PropTypes.func,
-};
+const theme = createTheme();
 
-export default Admin;
+export default function Admin() {
+  // const ctx = useContext(AuthContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  // const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then((response) => {
+    //     if (auth.currentUser.emailVerified) {
+    //       navigate('/components/Account/Account');
+    //     }
+    //     if (!auth.currentUser.emailVerified) {
+    //       sendEmailVerification(auth.currentUser)
+    //         .then(() => {
+    //           // ctx.updateTimeActive(500);
+    //           navigate('/verify-email');
+    //         })
+
+    //         .catch((err) => alert(err.message));
+    //     } else {
+    //       navigate('/components/Home/Home');
+    //     }
+    //   })
+    // .catch((error) => {
+    //   if (error.code === 'auth/wrong-password') {
+    //     toast.error('Please check the Password');
+    //   }
+    //   if (error.code === 'auth/user-not-found') {
+    //     toast.error('Please check the Email');
+    //   }
+    // });
+  };
+
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Typography component="h1" variant="h5">
+            Ingreso para Administrador
+          </Typography>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#/forgot-password">Forgot password?</Link>
+              </Grid>
+              <Grid item>
+                <Link href="#/register" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Copyright sx={{ mt: 8, mb: 4 }} />
+      </Container>
+    </ThemeProvider>
+  );
+}

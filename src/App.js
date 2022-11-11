@@ -17,8 +17,9 @@ function App() {
     <>
       <BrowserRouter>
         <ContextProvider>
+          <Login />
           <Routes>
-            <Route path="/" element={[<Login />]} />
+            <Route path="/" element={[<Login />, <Admin />]} />
             <Route path="/Pages/Admin" element={[<Admin />]} />
             <Route path="/Pages/Employee" element={[<Employee />]} />
           </Routes>

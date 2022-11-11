@@ -54,6 +54,7 @@ function Login(props) {
           <Divider />
         </ListItemIcon>
       </ListItemButton>
+      <Divider />
       <ListItemButton color="primary" component={Link} to={'/Pages/Employee'}>
         <ListItemIcon disablePadding>
           <Divider />
@@ -63,20 +64,6 @@ function Login(props) {
           Empleado
         </ListItemIcon>
       </ListItemButton>
-      {/* {['Administrador', 'Empleado'].map((text, index) => (
-        <ListItem key={text} disablePadding component={Link} to="/Pages/Admin">
-          <ListItemButton>
-            <ListItemIcon>
-              {index % 2 === 0 ? (
-                <EngineeringIcon />
-              ) : (
-                <SupervisorAccountIcon />
-              )}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItemButton>
-        </ListItem>
-      ))} */}
 
       <Divider />
     </div>
