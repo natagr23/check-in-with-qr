@@ -1,8 +1,16 @@
-import { List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Button,
+} from '@mui/material';
+
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Box, Grid } from '@mui/material';
 import { db } from './Firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 
 const InputEmployee = ({ arr }) => {
   return (
@@ -14,21 +22,41 @@ const InputEmployee = ({ arr }) => {
         alignItems: 'center',
       }}
     >
-      <List className="todo__list">
-        <ListItem>
-          <ListItemAvatar />
-          <ListItemText primary={arr.item.empleado} secondary={'empleado'} />
-          <ListItemText primary={arr.item.latitud} secondary={'latitud'} />
-          <ListItemText primary={arr.item.longitud} secondary={'longitud'} />
-        </ListItem>
-        <DeleteIcon
-          fontSize="large"
-          style={{ opacity: 0.7 }}
-          onClick={() => {
-            deleteDoc(doc(db, 'todos', arr.id));
-          }}
-        />
-      </List>
+      <Grid container>
+        <Grid item xs={6}>
+          <List className="todo__list">
+            <ListItem>
+              <ListItemAvatar />
+              <ListItemText
+                primary={arr.item.empleado}
+                secondary={'empleado'}
+              />
+              <ListItemText primary={arr.item.latitud} secondary={'latitud'} />
+              <ListItemText
+                primary={arr.item.longitud}
+                secondary={'longitud'}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                // onClick={addTodo}
+              >
+                Generar código QR
+              </Button>
+            </ListItem>
+            <DeleteIcon
+              fontSize="large"
+              style={{ opacity: 0.5 }}
+              onClick={() => {
+                deleteDoc(doc(db, 'todos', arr.id));
+              }}
+            />
+          </List>
+        </Grid>
+        <Grid item xs={6}>
+          imagen
+        </Grid>
+      </Grid>
     </Box>
   );
 };
