@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Context } from '../Pages/Context';
 import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
+import GenerateQr from './GenerateQr';
 
 export default function EmployeeAccount() {
   const ctx = useContext(Context);
@@ -21,6 +22,7 @@ export default function EmployeeAccount() {
 
   return (
     <>
+      <GenerateQr />
       <Box
         sx={{
           marginTop: 0,
