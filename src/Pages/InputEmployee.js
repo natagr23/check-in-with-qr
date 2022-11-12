@@ -1,3 +1,5 @@
+import React, { useEffect, useContext, useState } from 'react';
+
 import {
   List,
   ListItem,
@@ -13,6 +15,12 @@ import { doc, deleteDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 
 const InputEmployee = ({ arr }) => {
+  const [url, setUrl] = useState(
+    'https://picturesofpeoplescanningqrcodes.tumblr.com/'
+  );
+  const call_Url = (product) => {
+    setUrl(product.url);
+  };
   return (
     <Box
       sx={{
@@ -41,7 +49,7 @@ const InputEmployee = ({ arr }) => {
                 color="primary"
                 // onClick={addTodo}
               >
-                Generar código QR
+                código QR
               </Button>
             </ListItem>
             <DeleteIcon

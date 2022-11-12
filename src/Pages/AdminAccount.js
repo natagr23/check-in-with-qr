@@ -1,16 +1,25 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Box } from '@mui/material';
+import { Button, Box, ListItem } from '@mui/material';
 import { Context } from '../Pages/Context';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
-
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Locations from './Locations';
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  addDoc,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { db } from '../Pages/Firebase';
 
 import { QRCodeSVG } from 'qrcode.react';
+import EmployeeCard from './EmployeeCard';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -19,8 +28,23 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
+  const [employees, setEmployees] = useState([]);
+  const [input, setInput] = useState('');
+  const [latitude, setLatitude] = useState('');
+  const [longitude, setLongitude] = useState('');
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      setEmployees(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          item: doc.data(),
+        }))
+      );
+    });
+  }, []);
   const ctx = useContext(Context);
   let navigate = useNavigate();
 
@@ -54,6 +78,25 @@ export default function AdminAccount() {
         <Typography variant="h6" noWrap component="div">
           Sedes
         </Typography>
+
+        <Stack spacing={2}>
+          {/* {cartIsShown && <Cart onClose={hideCartHandler} />} */}
+          {employees.map((employee) => {
+            return (
+              <EmployeeCard
+                key={employee.item.id}
+                empleado={employee.item.empleado}
+                id={employee.item.id}
+                latitud={employee.item.latitud}
+                longitud={employee.item.longitud}
+                // image_url={product.image_url}
+                // OnSelectProduct={ctx.handleOpenMarker}
+                // onClick={ctx.selectProduct}
+                // product={employee}
+              />
+            );
+          })}
+        </Stack>
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>

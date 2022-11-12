@@ -28,7 +28,7 @@ function GenerateQr() {
         }))
       );
     });
-  }, [input]);
+  }, [input, latitude, longitude]);
   const addTodo = (e) => {
     e.preventDefault();
     addDoc(collection(db, 'todos'), {
@@ -39,6 +39,8 @@ function GenerateQr() {
     });
     console.log('click');
     setInput('');
+    setLatitude('');
+    setLongitude('');
   };
   console.log(employees);
 
