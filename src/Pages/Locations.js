@@ -33,7 +33,7 @@ const products = [
   },
 ];
 
-export default function Locations({ call_Url, url }) {
+export default function Locations({ call_Url, url, empleado }) {
   return (
     <Box sx={{ width: '100%' }}>
       <Stack spacing={1}>

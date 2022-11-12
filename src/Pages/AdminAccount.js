@@ -118,6 +118,56 @@ export default function AdminAccount() {
             </Grid>
           </Grid>
         </Box>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <Item>Products List</Item>
+              {/* <Locations url={url} call_Url={call_Url} /> */}
+              <Stack spacing={1}>
+                {employees.map((employee) => {
+                  return (
+                    <Button
+                      key={employee.item.id}
+                      onClick={() => {
+                        call_Url(employee.item.latitude);
+                      }}
+                      variant="contained"
+                      color="success"
+                    >
+                      {employee.item.empleado}
+                    </Button>
+                  );
+                })}
+                <div>{url}</div>
+              </Stack>
+            </Grid>
+            <Grid item xs={8}>
+              <Item>QR</Item>
+              {employees.map((employee) => {
+                return (
+                  <Item>
+                    <QRCodeSVG
+                      value={employee.item.empleado}
+                      size={128}
+                      bgColor={'#ffffff'}
+                      fgColor={'#000000'}
+                      level={'L'}
+                      includeMargin={false}
+                      imageSettings={{
+                        src: 'https://static.zpao.com/favicon.png',
+                        x: undefined,
+                        y: undefined,
+                        height: 24,
+                        width: 24,
+                        excavate: true,
+                      }}
+                    />
+                  </Item>
+                );
+              })}
+            </Grid>
+          </Grid>
+        </Box>
         <hr />
         <hr />
         <hr />

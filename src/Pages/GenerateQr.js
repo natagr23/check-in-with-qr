@@ -80,7 +80,7 @@ function GenerateQr() {
           onChange={(e) => setLongitude(e.target.value)}
         />
         <Button variant="contained" color="primary" onClick={addTodo}>
-          Agregar
+          Generar código QR
         </Button>
       </form>
       <List
@@ -98,7 +98,7 @@ function GenerateQr() {
           }}
         >
           {employees.map((item) => (
-            <InputEmployee key={item.id} arr={item} />
+            <InputEmployee key={item.id} employee={item} />
           ))}
         </ListItem>
       </List>
