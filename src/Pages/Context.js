@@ -8,11 +8,11 @@ export const ContextProvider = (props) => {
   const [timeActive, setTimeActive] = useState(false);
   const [employeeList, setEmployeeList] = useLocalStorage('employeeList', []);
 
-  const [officeLocationList, setOfficeLocationList] = useState([
+  const [officeLocationList, setOfficeLocationList] = useLocalStorage([
     { name: 'Bogota', id: '4544444' },
     { name: 'Bucaramanga', id: '6755555' },
   ]);
-  const [employeePerOfficeList, setEmployeePerOfficeList] = useState([
+  const [employeePerOfficeList, setEmployeePerOfficeList] = useLocalStorage([
     { office: 'Bogota', employee: 'Natalia' },
     { office: 'Bucaramanga', employee: 'Natalia' },
     { office: 'Bucaramanga', employee: 'Jorge' },
@@ -23,7 +23,7 @@ export const ContextProvider = (props) => {
       { name: 'Natalia', email: 'nata555@hotmail.com' },
       { name: 'Jorge', email: 'jorge555@hotmail.com' },
     ]);
-  }, [setEmployeeList]);
+  }, []);
 
   const updateUser = () => {
     setCurrentUser(2);

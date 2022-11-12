@@ -42,13 +42,13 @@ function GenerateQr() {
     setLatitude('');
     setLongitude('');
   };
-  console.log(employees);
+  // console.log(employees);
 
   return (
     <div>
       <form>
         <Typography variant="h6" noWrap component="div">
-          Generar código QR
+          Control de Sedes e Ingreso Empleados
         </Typography>
 
         <TextField
@@ -80,7 +80,7 @@ function GenerateQr() {
           onChange={(e) => setLongitude(e.target.value)}
         />
         <Button variant="contained" color="primary" onClick={addTodo}>
-          Generar código QR
+          Generar QR
         </Button>
       </form>
       <List

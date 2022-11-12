@@ -74,13 +74,6 @@ const InputEmployee = ({ employee }) => {
                 primary={employee.item.longitud}
                 secondary={'longitud'}
               />
-              {/* <Button
-                variant="contained"
-                color="primary"
-                // onClick={addTodo}
-              >
-                Generar código QR
-              </Button> */}
             </ListItem>
             <DeleteIcon
               fontSize="large"

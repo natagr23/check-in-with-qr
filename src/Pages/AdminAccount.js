@@ -13,6 +13,7 @@ import { db } from '../Pages/Firebase';
 
 import { QRCodeSVG } from 'qrcode.react';
 import EmployeeCard from './EmployeeCard';
+// import GenerateQr from './GenerateQr';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -24,28 +25,27 @@ const Item = styled(Paper)(({ theme }) => ({
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
-  const [employees, setEmployees] = useState([]);
+  // const [employees, setEmployees] = useState([]);
 
-  useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      setEmployees(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          item: doc.data(),
-        }))
-      );
-    });
-  }, []);
+  // useEffect(() => {
+  //   onSnapshot(q, (snapshot) => {
+  //     setEmployees(
+  //       snapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         item: doc.data(),
+  //       }))
+  //     );
+  //   });
+  // }, []);
   const ctx = useContext(Context);
   let navigate = useNavigate();
 
   const [url, setUrl] = useState(
     'https://picturesofpeoplescanningqrcodes.tumblr.com/'
   );
-  const [identification, setIdentification] = useState('CC 20365987');
+
   const call_Url = (product) => {
     setUrl(product.url);
-    // setIdentification(employees.item.empleado);
   };
 
   const handleLogout = () => {
@@ -67,11 +67,12 @@ export default function AdminAccount() {
           alignItems: 'center',
         }}
       >
+        {/* <GenerateQr /> */}
         <Typography variant="h6" noWrap component="div">
           Sedes
         </Typography>
 
-        <Stack spacing={2}>
+        {/* <Stack spacing={2}>
           {employees.map((employee) => {
             return (
               <EmployeeCard
@@ -80,50 +81,17 @@ export default function AdminAccount() {
                 id={employee.item.id}
                 latitud={employee.item.latitud}
                 longitud={employee.item.longitud}
-                // image_url={product.image_url}
-                // OnSelectProduct={ctx.handleOpenMarker}
-                // onClick={ctx.selectProduct}
-                // product={employee}
               />
             );
           })}
-        </Stack>
+        </Stack> */}
 
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2}>
             <Grid item xs={4}>
               <Item>Products List</Item>
-              <Locations url={url} call_Url={call_Url} />
-            </Grid>
-            <Grid item xs={8}>
-              <Item>QR</Item>
-              <Item>
-                <QRCodeSVG
-                  value={url}
-                  size={128}
-                  bgColor={'#ffffff'}
-                  fgColor={'#000000'}
-                  level={'L'}
-                  includeMargin={false}
-                  imageSettings={{
-                    src: 'https://static.zpao.com/favicon.png',
-                    x: undefined,
-                    y: undefined,
-                    height: 24,
-                    width: 24,
-                    excavate: true,
-                  }}
-                />
-              </Item>
-            </Grid>
-          </Grid>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <Item>Products List</Item>
               {/* <Locations url={url} call_Url={call_Url} /> */}
-              <Stack spacing={1}>
+              {/* <Stack spacing={1}>
                 {employees.map((employee) => {
                   return (
                     <Button
@@ -139,11 +107,11 @@ export default function AdminAccount() {
                   );
                 })}
                 <div>{url}</div>
-              </Stack>
+              </Stack> */}
             </Grid>
             <Grid item xs={8}>
               <Item>QR</Item>
-              {employees.map((employee) => {
+              {/* {employees.map((employee) => {
                 return (
                   <Item>
                     <QRCodeSVG
@@ -164,7 +132,7 @@ export default function AdminAccount() {
                     />
                   </Item>
                 );
-              })}
+              })} */}
             </Grid>
           </Grid>
         </Box>
