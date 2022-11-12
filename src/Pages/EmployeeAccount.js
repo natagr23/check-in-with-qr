@@ -22,7 +22,6 @@ export default function EmployeeAccount() {
 
   return (
     <>
-      <GenerateQr />
       <Box
         sx={{
           marginTop: 0,
@@ -31,6 +30,7 @@ export default function EmployeeAccount() {
           alignItems: 'center',
         }}
       >
+        <GenerateQr />
         <Typography variant="h6" noWrap component="div">
           Generar código QR
         </Typography>

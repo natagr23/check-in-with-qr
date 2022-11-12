@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import InputEmployee from './InputEmployee';
 import { db } from '../Pages/Firebase';
 import {
@@ -42,21 +43,25 @@ function GenerateQr() {
   console.log(todos);
 
   return (
-    <div className="App">
-      <h2> TODO List App</h2>
+    <div>
       <form>
+        <Typography variant="h6" noWrap component="div">
+          Generar código QR
+        </Typography>
+
         <TextField
           id="outlined-basic"
-          label="Make Todo"
+          label="Nombre Empleado"
           variant="outlined"
           style={{ margin: '0px 5px' }}
           size="small"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
+
         <TextField
           id="outlined-basic"
-          label="Make Todo"
+          label="Latitud"
           variant="outlined"
           style={{ margin: '0px 5px' }}
           size="small"
@@ -65,7 +70,7 @@ function GenerateQr() {
         />
         <TextField
           id="outlined-basic"
-          label="Make Todo"
+          label="Longitud"
           variant="outlined"
           style={{ margin: '0px 5px' }}
           size="small"
@@ -73,7 +78,7 @@ function GenerateQr() {
           onChange={(e) => setInput3(e.target.value)}
         />
         <Button variant="contained" color="primary" onClick={addTodo}>
-          Add Todo
+          Agregar
         </Button>
       </form>
       <ul>

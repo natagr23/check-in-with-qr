@@ -1,6 +1,6 @@
 import { List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { db } from './Firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
 
@@ -9,8 +9,8 @@ const InputEmployee = ({ arr }) => {
     <Box
       sx={{
         marginTop: 0,
-        display: 'flex',
-        flexDirection: 'column',
+        // display: 'flex',
+        // flexDirection: 'row',
         alignItems: 'center',
       }}
     >
