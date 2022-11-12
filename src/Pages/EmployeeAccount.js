@@ -33,19 +33,6 @@ export default function EmployeeAccount() {
         }}
       >
         <GenerateQr />
-        <Typography variant="h6" noWrap component="div">
-          Generar código QR
-        </Typography>
-        <Button
-          sx={{ marginLeft: '10px' }}
-          variant="contained"
-          label="My Products"
-          component={Link}
-          to={'/'}
-          // value={value}
-        >
-          Generate QR{''}
-        </Button>
 
         <hr />
         <hr />

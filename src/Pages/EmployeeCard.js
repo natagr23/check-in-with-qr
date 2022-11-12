@@ -15,8 +15,8 @@ export default function EmployeeCard(props) {
         <CardMedia
           component="img"
           height="140"
-          // image={props.image_url}
-          image="https://source.unsplash.com/1600x900/?vegetable"
+          //   image={props.image_url}
+          image="https://source.unsplash.com/1600x900/?face"
           alt="green iguana"
         />
         <CardContent>

@@ -49,7 +49,7 @@ const InputEmployee = ({ arr }) => {
                 color="primary"
                 // onClick={addTodo}
               >
-                código QR
+                Generar código QR
               </Button>
             </ListItem>
             <DeleteIcon

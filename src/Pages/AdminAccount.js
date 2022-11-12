@@ -8,14 +8,7 @@ import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Locations from './Locations';
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  addDoc,
-  serverTimestamp,
-} from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../Pages/Firebase';
 
 import { QRCodeSVG } from 'qrcode.react';
@@ -32,9 +25,7 @@ const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
   const [employees, setEmployees] = useState([]);
-  const [input, setInput] = useState('');
-  const [latitude, setLatitude] = useState('');
-  const [longitude, setLongitude] = useState('');
+
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setEmployees(
@@ -51,15 +42,16 @@ export default function AdminAccount() {
   const [url, setUrl] = useState(
     'https://picturesofpeoplescanningqrcodes.tumblr.com/'
   );
+  const [identification, setIdentification] = useState('CC 20365987');
   const call_Url = (product) => {
     setUrl(product.url);
+    // setIdentification(employees.item.empleado);
   };
 
   const handleLogout = () => {
     navigate('/');
     ctx.currentUser = 1;
   };
-  // const ctx = useContext(AuthContext);
 
   useEffect(() => {
     navigate('/Pages/AdminAccount');
@@ -80,7 +72,6 @@ export default function AdminAccount() {
         </Typography>
 
         <Stack spacing={2}>
-          {/* {cartIsShown && <Cart onClose={hideCartHandler} />} */}
           {employees.map((employee) => {
             return (
               <EmployeeCard
