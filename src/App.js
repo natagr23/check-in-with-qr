@@ -24,7 +24,10 @@ function App() {
             <Route path="/" element={[<Login />, <LoginAdmin />]} />
             <Route path="/Pages/LoginAdmin" element={[<LoginAdmin />]} />
             <Route path="/Pages/LoginEmployee" element={[<LoginEmployee />]} />
-            <Route path="/Pages/AdminAccount" element={[<AdminAccount />]} />
+            <Route
+              path="/Pages/AdminAccount/:emailLink"
+              element={[<AdminAccount />]}
+            />
             <Route
               path="/Pages/EmployeeAccount"
               element={[<EmployeeAccount />]}

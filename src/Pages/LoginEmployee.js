@@ -13,16 +13,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
-
-// import {
-//   signInWithEmailAndPassword,
-//   sendEmailVerification,
-// } from 'firebase/auth';
-// import { auth } from '../Api/firebase-config';
+import { Context } from '../Pages/Context';
 import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from '../AuthContext/AuthContext';
 
 function Copyright(props) {
   return (
@@ -45,8 +37,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Employee() {
-  // const ctx = useContext(AuthContext);
-  const [email, setEmail] = useState('');
+  const ctx = useContext(Context);
+
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -118,7 +110,8 @@ export default function Employee() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => ctx.updateLoggedEmployeeEmail(e.target.value)}
+              value={ctx.loggedEmployeeEmail}
             />
             <TextField
               margin="normal"

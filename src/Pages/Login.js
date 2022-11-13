@@ -55,7 +55,7 @@ function Login(props) {
       <Toolbar />
       <Divider />
       <ListItemButton
-        disablePadding
+        
         color="primary"
         component={Link}
         onClick={handleGo}
@@ -74,7 +74,7 @@ function Login(props) {
         component={Link}
         onClick={handleGoEmployee}
       >
-        <ListItemIcon disablePadding>
+        <ListItemIcon>
           <Divider />
           <IconButton
             color="primary"

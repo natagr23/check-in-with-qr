@@ -4,9 +4,13 @@ import useLocalStorage from '../Hooks/useLocalStorage';
 export const Context = createContext({});
 
 export const ContextProvider = (props) => {
+  const [loggedEmployeeEmail, setLoggedEmployeeEmail] = useState('');
   const [currentUser, setCurrentUser] = useState(1);
   const [timeActive, setTimeActive] = useState(false);
-  const [employeeList, setEmployeeList] = useLocalStorage('employeeList', []);
+  const [employeeList, setEmployeeList] = useLocalStorage('employeeList', [
+    { name: 'Natalia', id: '4544444', email: 'ngr@gmail.com' },
+    { name: 'Pedro', id: '6755555', email: 'pedrojh@gmail.com' },
+  ]);
 
   const [officeLocationList, setOfficeLocationList] = useLocalStorage(
     'officeLocationList',
@@ -47,8 +51,8 @@ export const ContextProvider = (props) => {
     setTimeActive(() => timeActive);
   };
 
-  const updateEmailList = (emailList) => {
-    setEmailList(() => emailList);
+  const updateLoggedEmployeeEmail = (newLoggedEmployeeEmail) => {
+    setLoggedEmployeeEmail(() => newLoggedEmployeeEmail);
   };
 
   const addNewEmployee = (newName, newEmail) => {
@@ -69,6 +73,15 @@ export const ContextProvider = (props) => {
     ]);
   };
 
+  const deleteEmployee = (employee) => {
+    setEmployeeList((prev) => {
+      return prev.filter((employeeItem) => {
+        const isSameEmployee = employeeItem.email === employee.email;
+        return !isSameEmployee;
+      });
+    });
+  };
+
   const addNewEmail = (newEmail) => {
     setEmailList([...emailList, { email: newEmail }]);
   };
@@ -76,8 +89,10 @@ export const ContextProvider = (props) => {
   return (
     <Context.Provider
       value={{
+        loggedEmployeeEmail: loggedEmployeeEmail,
+        deleteEmployee: deleteEmployee,
         addNewEmail: addNewEmail,
-        updateEmailList: updateEmailList,
+        updateLoggedEmployeeEmail: updateLoggedEmployeeEmail,
         emailList: emailList,
         addNewemployeePerOffice: addNewemployeePerOffice,
         addNewOfficeLocation: addNewOfficeLocation,

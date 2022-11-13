@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
 import { Context } from '../Pages/Context';
 import { styled } from '@mui/material/styles';
@@ -13,10 +13,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-
+import Autocomplete from '@mui/material/Autocomplete';
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../Pages/Firebase';
-import { QRCodeSVG } from 'qrcode.react';
+
 // import EmployeeCard from './EmployeeCard';
 // import GenerateQr from './GenerateQr';
 
@@ -30,28 +30,22 @@ const Item = styled(Paper)(({ theme }) => ({
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
+  const ctx = useContext(Context);
   const [employees, setEmployees] = useState([]);
-
-  const refNameEmployee = useRef();
-  const refEmail = useRef();
+  const [newEmployeeName, setNewEmployeeName] = useState('');
+  const [newEmployeeEmail, setNewEmployeeEmail] = useState('');
+  const [selectedLocation, setSelectedLocation] = useState(
+    ctx.officeLocationList[0]
+  );
+  const [selectedEmployee, setSelectedEmployee] = useState(ctx.employeeList[0]);
 
   const refNameLocation = useRef();
   const refLocationId = useRef();
-
-  const refNameLocationPerEmployee = useRef();
-  const refNameEmployeePerLocation = useRef();
-
+  const { emailLink } = useParams();
   useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      setEmployees(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          item: doc.data(),
-        }))
-      );
-    });
-  }, []);
-  const ctx = useContext(Context);
+    console.log(emailLink);
+  }, [emailLink]);
+
   let navigate = useNavigate();
 
   const [url, setUrl] = useState(
@@ -69,7 +63,7 @@ export default function AdminAccount() {
 
   const employeeHandler = (e) => {
     e.preventDefault();
-    ctx.addNewEmployee(refNameEmployee.current.value, refEmail.current.value);
+    ctx.addNewEmployee(newEmployeeName, newEmployeeEmail);
   };
 
   const officeLocationHandler = (e) => {
@@ -80,12 +74,10 @@ export default function AdminAccount() {
     );
   };
 
+  //escribo name porque el autocomplete me guarda el objeto seleccionado
   const officeLocationPerEmployeeHandler = (e) => {
     e.preventDefault();
-    ctx.addNewemployeePerOffice(
-      refNameLocationPerEmployee.current.value,
-      refNameEmployeePerLocation.current.value
-    );
+    ctx.addNewemployeePerOffice(selectedLocation.name, selectedEmployee.email);
   };
 
   useEffect(() => {
@@ -93,121 +85,198 @@ export default function AdminAccount() {
     ctx.currentUser = 2;
   }, [ctx, navigate]);
   return (
-    <>
-      <Box
-        sx={{
-          marginTop: 0,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography variant="h6" noWrap component="div">
-          Lista de Empleados
-        </Typography>
-        <Stack spacing={3}>
-          <form onSubmit={employeeHandler}>
-            <input
-              minRows={1}
-              name="title"
-              // onChange={(e) => setProductName(e.target.value)}
-              // value={productName}
-              ref={refNameEmployee}
-              placeholder="Nombre del Empleado"
-              variant="filled"
-              id="add Product"
-              label="Nombre del Empleado"
-            />
+    <Stack
+      spacing={2}
+      justifyContent="flex-end"
+      alignItems="center"
+      sx={{
+        marginLeft: 40,
+        // display: 'flex',
+        // flexDirection: 'column',
+        maxWidth: '70%',
+      }}
+    >
+      <Typography variant="h6" noWrap component="div">
+        Lista de Empleados
+      </Typography>
+      <Stack direction="row" spacing={3}>
+        <TextField
+          name="title"
+          onChange={(e) => setNewEmployeeName(e.target.value)}
+          value={newEmployeeName}
+          placeholder="Nombre del Empleado"
+          variant="filled"
+          id="add Product"
+          label="Nombre del Empleado"
+        />
 
-            <input
-              minRows={1}
-              // onChange={(e) => setProductDescription(e.target.value)}
-              variant="filled"
-              ref={refEmail}
-              placeholder="Email del Empleado"
-              // value={productDescription}
-              label="Email del Empleado"
-            />
+        <TextField
+          variant="filled"
+          placeholder="Email del Empleado"
+          onChange={(e) => setNewEmployeeEmail(e.target.value)}
+          value={newEmployeeEmail}
+          label="Email del Empleado"
+        />
 
-            <Stack
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="baseline"
-              spacing={1}
-            >
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={employeeHandler}
-              >
-                Add
-              </Button>
-            </Stack>
-          </form>
-        </Stack>
+        <Button variant="contained" type="submit" onClick={employeeHandler}>
+          Add
+        </Button>
+      </Stack>
 
-        <div>
-          <TableContainer component={Paper}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Nombre del Empleado</TableCell>
-                <TableCell>Identificacion</TableCell>
-              </TableRow>
-            </TableHead>
+      <TableContainer component={Paper}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Nombre del Empleado</TableCell>
+            <TableCell>Identificacion</TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+        </TableHead>
+        <Table>
+          <TableBody>
             {ctx.employeeList.map((employee) => {
               return (
-                <Table>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{employee.name}</TableCell>
-                      <TableCell>{employee.email}</TableCell>
+                <TableRow key={employee.email}>
+                  <TableCell>{employee.name}</TableCell>
+                  <TableCell>{employee.email}</TableCell>
 
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          type="submit"
-                          color="error"
-                          // onClick={handleDelete}
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      onClick={() => {
+                        ctx.deleteEmployee(employee);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
               );
             })}
-          </TableContainer>
-        </div>
-        <Typography variant="h6" noWrap component="div">
-          Lista de Sedes
-        </Typography>
-        <Stack spacing={3}>
-          <form onSubmit={officeLocationHandler}>
-            <input
-              minRows={1}
-              name="title"
-              // onChange={(e) => setProductName(e.target.value)}
-              // value={productName}
-              ref={refNameLocation}
-              placeholder="Nombre de Ciudad de la Sede"
-              variant="filled"
-              id="add Product"
-              label="Nombre de Ciudad de la Sede"
-            />
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-            <input
-              minRows={1}
-              // onChange={(e) => setProductDescription(e.target.value)}
-              variant="filled"
-              ref={refLocationId}
-              placeholder="Identificacción de la Sede"
-              // value={productDescription}
-              label="Identificacción de la Sede"
-            />
-          </form>
+      <Typography variant="h6" noWrap component="div">
+        Lista de Sedes
+      </Typography>
+      <Stack spacing={3}>
+        <form onSubmit={officeLocationHandler}>
+          <input
+            name="title"
+            // onChange={(e) => setProductName(e.target.value)}
+            // value={productName}
+            ref={refNameLocation}
+            placeholder="Nombre de Ciudad de la Sede"
+            variant="filled"
+            id="add Product"
+            label="Nombre de Ciudad de la Sede"
+          />
+
+          <input
+            // onChange={(e) => setProductDescription(e.target.value)}
+            variant="filled"
+            ref={refLocationId}
+            placeholder="Identificacción de la Sede"
+            // value={productDescription}
+            label="Identificacción de la Sede"
+          />
+        </form>
+        <Stack
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="baseline"
+          spacing={1}
+        >
+          <Button
+            variant="contained"
+            type="submit"
+            onClick={officeLocationHandler}
+          >
+            Add
+          </Button>
+        </Stack>
+      </Stack>
+      <div>
+        <TableContainer component={Paper}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Nombre de la Sede</TableCell>
+              <TableCell>Identificacion</TableCell>
+            </TableRow>
+          </TableHead>
+          {ctx.officeLocationList.map((office) => {
+            return (
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>{office.name}</TableCell>
+                    <TableCell>{office.id}</TableCell>
+
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        color="error"
+                        // onClick={handleDelete}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            );
+          })}
+        </TableContainer>
+      </div>
+      <Typography variant="h6" noWrap component="div">
+        Lista de Sedes por Empleado
+      </Typography>
+      <Stack spacing={3}>
+        <form onSubmit={officeLocationPerEmployeeHandler}>
+          {/* <input
+            name="title"
+            ref={refNameLocationPerEmployee}
+            // onChange={(e) => setProductName(e.target.value)}
+            // value={productName}
+            placeholder="Nombre de la Sede"
+            variant="filled"
+            id="add Product"
+            label="Nombre de la Sede"
+          /> */}
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            getOptionLabel={(sede) => sede.name}
+            value={selectedLocation}
+            onChange={(event, newValue) => {
+              setSelectedLocation(newValue);
+            }}
+            options={ctx.officeLocationList}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Sede" />}
+          />
+
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            getOptionLabel={(empleado) =>
+              `${empleado.name} (${empleado.email})`
+            }
+            value={selectedEmployee}
+            onChange={(event, newValue) => {
+              setSelectedEmployee(newValue);
+            }}
+            options={ctx.employeeList}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Empleado" />}
+          />
+
           <Stack
             direction="row"
             justifyContent="flex-end"
@@ -217,224 +286,52 @@ export default function AdminAccount() {
             <Button
               variant="contained"
               type="submit"
-              onClick={officeLocationHandler}
+              onClick={officeLocationPerEmployeeHandler}
             >
               Add
             </Button>
           </Stack>
-        </Stack>
-        <div>
-          <TableContainer component={Paper}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Nombre de la Sede</TableCell>
-                <TableCell>Identificacion</TableCell>
-              </TableRow>
-            </TableHead>
-            {ctx.officeLocationList.map((office) => {
-              return (
-                <Table>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{office.name}</TableCell>
-                      <TableCell>{office.id}</TableCell>
-
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          type="submit"
-                          color="error"
-                          // onClick={handleDelete}
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              );
-            })}
-          </TableContainer>
-        </div>
-        <Typography variant="h6" noWrap component="div">
-          Lista de Sedes por Empleado
-        </Typography>
-        <Stack spacing={3}>
-          <form onSubmit={officeLocationPerEmployeeHandler}>
-            <input
-              minRows={1}
-              name="title"
-              ref={refNameLocationPerEmployee}
-              // onChange={(e) => setProductName(e.target.value)}
-              // value={productName}
-              placeholder="Nombre de la Sede"
-              variant="filled"
-              id="add Product"
-              label="Nombre de la Sede"
-            />
-
-            <input
-              minRows={1}
-              // onChange={(e) => setProductDescription(e.target.value)}
-              variant="filled"
-              ref={refNameEmployeePerLocation}
-              placeholder="Nombre del Empleado"
-              // value={productDescription}
-              label="Nombre del Empleado"
-            />
-
-            <Stack
-              direction="row"
-              justifyContent="flex-end"
-              alignItems="baseline"
-              spacing={1}
-            >
-              <Button
-                variant="contained"
-                type="submit"
-                onClick={officeLocationPerEmployeeHandler}
-              >
-                Add
-              </Button>
-            </Stack>
-          </form>
-        </Stack>
-        <div>
-          <TableContainer component={Paper}>
-            <TableHead>
-              <TableRow>
-                <TableCell>Nombre de la Sede</TableCell>
-                <TableCell>Nombre del Empleado</TableCell>
-              </TableRow>
-            </TableHead>
-            {ctx.employeePerOfficeList.map((employeePerOffice) => {
-              return (
-                <Table>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{employeePerOffice.office}</TableCell>
-                      <TableCell>{employeePerOffice.employee}</TableCell>
-
-                      <TableCell>
-                        <Button
-                          variant="contained"
-                          type="submit"
-                          color="error"
-                          // onClick={handleDelete}
-                        >
-                          Delete
-                        </Button>
-                      </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              );
-            })}
-          </TableContainer>
-        </div>
-        {/* <GenerateQr /> */}
-        <Typography variant="h6" noWrap component="div">
-          Verificación de la Identificación del Empleado
-        </Typography>
-
-        <Box>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <Item> Identificación Empleado</Item>
-
-              <Stack spacing={1}>
-                {ctx.emailList.map((email) => {
-                  return (
-                    <Button
-                      // key={Math.random()}
-                      // onClick={() => {
-                      //   call_Url(employee.item.latitude);
-                      // }}
-                      variant="contained"
-                      color="success"
-                    >
-                      {email.email}
-                    </Button>
-                  );
-                })}
-                {/* <div>{url}</div> */}
-              </Stack>
-            </Grid>
-            <Grid item xs={3}>
-              <Item>QR</Item>
-              {ctx.emailList.map((employee) => {
-                return (
-                  <Item>
-                    <QRCodeSVG
-                      value={employee.email}
-                      size={128}
-                      bgColor={'#ffffff'}
-                      fgColor={'#000000'}
-                      level={'L'}
-                      includeMargin={false}
-                      imageSettings={{
-                        src: 'https://static.zpao.com/favicon.png',
-                        x: undefined,
-                        y: undefined,
-                        height: 24,
-                        width: 24,
-                        excavate: true,
-                      }}
-                    />
-                  </Item>
-                );
-              })}
-            </Grid>
-            <Grid item xs={6}>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Latitud</TableCell>
-                      <TableCell>Longitud</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow>
-                      <TableCell>{'Latitud'}</TableCell>
-                      <TableCell>{'Longitud'}</TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Grid>
-          </Grid>
-        </Box>
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-        <Stack direction="row" spacing={3}>
-          <Button variant="contained" label="SignOut" onClick={handleLogout}>
-            SignOut{''}
-          </Button>
-        </Stack>
-      </Box>
-    </>
-  );
-}
-
-{
-  /* <Stack spacing={2}>
-          {employees.map((employee) => {
+        </form>
+      </Stack>
+      <div>
+        <TableContainer component={Paper}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Nombre de la Sede</TableCell>
+              <TableCell>Nombre del Empleado</TableCell>
+            </TableRow>
+          </TableHead>
+          {ctx.employeePerOfficeList.map((employeePerOffice) => {
             return (
-              <EmployeeCard
-                key={employee.item.id}
-                empleado={employee.item.empleado}
-                id={employee.item.id}
-                latitud={employee.item.latitud}
-                longitud={employee.item.longitud}
-              />
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>{employeePerOffice.office}</TableCell>
+                    <TableCell>{employeePerOffice.employee}</TableCell>
+
+                    <TableCell>
+                      <Button
+                        variant="contained"
+                        type="submit"
+                        color="error"
+                        // onClick={handleDelete}
+                      >
+                        Delete
+                      </Button>
+                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell></TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
             );
           })}
-        </Stack> */
+        </TableContainer>
+      </div>
+
+      <Button variant="contained" label="SignOut" onClick={handleLogout}>
+        SignOut{''}
+      </Button>
+    </Stack>
+  );
 }
