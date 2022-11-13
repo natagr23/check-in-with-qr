@@ -1,10 +1,9 @@
 import React, { useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box } from '@mui/material';
-
-import { Context } from '../Pages/Context';
-
+import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import { Context } from '../Pages/Context';
 
 export default function EmployeeAccount() {
   const ctx = useContext(Context);
@@ -35,6 +34,12 @@ export default function EmployeeAccount() {
         <hr />
         <hr />
         <hr />
+
+        <Stack sx={{ width: '60%' }} spacing={2}>
+          <Alert severity="success">
+            Su código QR ha sido generado exitosamente!
+          </Alert>
+        </Stack>
         <Stack direction="row" spacing={3}>
           <Button variant="contained" label="SignOut" onClick={handleLogout}>
             SignOut{''}

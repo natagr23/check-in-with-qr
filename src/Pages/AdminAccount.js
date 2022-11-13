@@ -342,35 +342,35 @@ export default function AdminAccount() {
         </Typography>
 
         <Box>
-          <Grid container spacing={3}>
-            <Grid item xs={3}>
-              <Item> Empleado</Item>
+          <Grid container spacing={2}>
+            <Grid item xs={4}>
+              <Item> Identificación Empleado</Item>
 
               <Stack spacing={1}>
-                {employees.map((employee) => {
+                {ctx.emailList.map((email) => {
                   return (
                     <Button
-                      key={employee.item.id}
+                      // key={Math.random()}
                       // onClick={() => {
                       //   call_Url(employee.item.latitude);
                       // }}
                       variant="contained"
                       color="success"
                     >
-                      {employee.item.empleado}
+                      {email.email}
                     </Button>
                   );
                 })}
-                <div>{url}</div>
+                {/* <div>{url}</div> */}
               </Stack>
             </Grid>
             <Grid item xs={3}>
               <Item>QR</Item>
-              {employees.map((employee) => {
+              {ctx.emailList.map((employee) => {
                 return (
                   <Item>
                     <QRCodeSVG
-                      value={employee.item.empleado}
+                      value={employee.email}
                       size={128}
                       bgColor={'#ffffff'}
                       fgColor={'#000000'}

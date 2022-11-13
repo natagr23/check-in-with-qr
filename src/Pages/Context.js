@@ -23,30 +23,21 @@ export const ContextProvider = (props) => {
       { office: 'Bucaramanga', employee: 'Jorge' },
     ]
   );
+  const [emailList, setEmailList] = useLocalStorage('emailList', [
+    { email: 'pruebaxx@gmail.com' },
+    { email: 'pruebagg@gmail.com' },
+  ]);
 
-  // useEffect(() => {
-  //   setEmployeeList([
-  //     {
-  //       name: 'Natalia',
-  //       email: 'nata555@hotmail.com',
-  //     },
-  //     {
-  //       name: 'Jorge',
-  //       email: 'jorge555@hotmail.com',
-  //     },
-  //   ]);
-  // }, []);
-
-  const updateEmployeeList = (data) => {
-    setEmployeeList(() => data);
+  const updateEmployeeList = (employeeList) => {
+    setEmployeeList(() => employeeList);
   };
 
-  const updateOfficeLocationList = (data) => {
-    setOfficeLocationList(() => data);
+  const updateOfficeLocationList = (officeLocationList) => {
+    setOfficeLocationList(() => officeLocationList);
   };
 
-  const updateEmployeePerOfficeList = (data) => {
-    setEmployeePerOfficeList(() => data);
+  const updateEmployeePerOfficeList = (employeePerOfficeList) => {
+    setEmployeePerOfficeList(() => employeePerOfficeList);
   };
   const updateUser = () => {
     setCurrentUser(2);
@@ -54,6 +45,10 @@ export const ContextProvider = (props) => {
 
   const updateTimeActive = (timeActive) => {
     setTimeActive(() => timeActive);
+  };
+
+  const updateEmailList = (emailList) => {
+    setEmailList(() => emailList);
   };
 
   const addNewEmployee = (newName, newEmail) => {
@@ -74,9 +69,16 @@ export const ContextProvider = (props) => {
     ]);
   };
 
+  const addNewEmail = (newEmail) => {
+    setEmailList([...emailList, { email: newEmail }]);
+  };
+
   return (
     <Context.Provider
       value={{
+        addNewEmail: addNewEmail,
+        updateEmailList: updateEmailList,
+        emailList: emailList,
         addNewemployeePerOffice: addNewemployeePerOffice,
         addNewOfficeLocation: addNewOfficeLocation,
         addNewEmployee: addNewEmployee,
