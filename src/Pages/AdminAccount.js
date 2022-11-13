@@ -35,6 +35,12 @@ export default function AdminAccount() {
   const refNameEmployee = useRef();
   const refEmail = useRef();
 
+  const refNameLocation = useRef();
+  const refLocationId = useRef();
+
+  const refNameLocationPerEmployee = useRef();
+  const refNameEmployeePerLocation = useRef();
+
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setEmployees(
@@ -64,6 +70,22 @@ export default function AdminAccount() {
   const employeeHandler = (e) => {
     e.preventDefault();
     ctx.addNewEmployee(refNameEmployee.current.value, refEmail.current.value);
+  };
+
+  const officeLocationHandler = (e) => {
+    e.preventDefault();
+    ctx.addNewOfficeLocation(
+      refNameLocation.current.value,
+      refLocationId.current.value
+    );
+  };
+
+  const officeLocationPerEmployeeHandler = (e) => {
+    e.preventDefault();
+    ctx.addNewemployeePerOffice(
+      refNameLocationPerEmployee.current.value,
+      refNameEmployeePerLocation.current.value
+    );
   };
 
   useEffect(() => {
@@ -163,33 +185,40 @@ export default function AdminAccount() {
           Lista de Sedes
         </Typography>
         <Stack spacing={3}>
-          <TextField
-            minRows={1}
-            name="title"
-            // onChange={(e) => setProductName(e.target.value)}
-            // value={productName}
-            placeholder=""
-            variant="filled"
-            id="add Product"
-            label="Nombre de Ciudad de la Sede"
-          />
+          <form onSubmit={officeLocationHandler}>
+            <input
+              minRows={1}
+              name="title"
+              // onChange={(e) => setProductName(e.target.value)}
+              // value={productName}
+              ref={refNameLocation}
+              placeholder="Nombre de Ciudad de la Sede"
+              variant="filled"
+              id="add Product"
+              label="Nombre de Ciudad de la Sede"
+            />
 
-          <TextField
-            minRows={1}
-            // onChange={(e) => setProductDescription(e.target.value)}
-            variant="filled"
-            placeholder=""
-            // value={productDescription}
-            label="Identificación de la Sede"
-          />
-
+            <input
+              minRows={1}
+              // onChange={(e) => setProductDescription(e.target.value)}
+              variant="filled"
+              ref={refLocationId}
+              placeholder="Identificacción de la Sede"
+              // value={productDescription}
+              label="Identificacción de la Sede"
+            />
+          </form>
           <Stack
             direction="row"
             justifyContent="flex-end"
             alignItems="baseline"
             spacing={1}
           >
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              onClick={officeLocationHandler}
+            >
               Add
             </Button>
           </Stack>
@@ -233,40 +262,44 @@ export default function AdminAccount() {
           Lista de Sedes por Empleado
         </Typography>
         <Stack spacing={3}>
-          <TextField
-            minRows={1}
-            name="title"
-            // onChange={(e) => setProductName(e.target.value)}
-            // value={productName}
-            placeholder=""
-            variant="filled"
-            id="add Product"
-            label="Nombre del Empleado"
-          />
+          <form onSubmit={officeLocationPerEmployeeHandler}>
+            <input
+              minRows={1}
+              name="title"
+              ref={refNameLocationPerEmployee}
+              // onChange={(e) => setProductName(e.target.value)}
+              // value={productName}
+              placeholder="Nombre de la Sede"
+              variant="filled"
+              id="add Product"
+              label="Nombre de la Sede"
+            />
 
-          <TextField
-            minRows={1}
-            // onChange={(e) => setProductDescription(e.target.value)}
-            variant="filled"
-            placeholder=""
-            // value={productDescription}
-            label="Nombre de la Sede"
-          />
+            <input
+              minRows={1}
+              // onChange={(e) => setProductDescription(e.target.value)}
+              variant="filled"
+              ref={refNameEmployeePerLocation}
+              placeholder="Nombre del Empleado"
+              // value={productDescription}
+              label="Nombre del Empleado"
+            />
 
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="baseline"
-            spacing={1}
-          >
-            <Button
-              variant="contained"
-              type="submit"
-              //  onClick={ctx.addNewEmployee}
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="baseline"
+              spacing={1}
             >
-              Add
-            </Button>
-          </Stack>
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={officeLocationPerEmployeeHandler}
+              >
+                Add
+              </Button>
+            </Stack>
+          </form>
         </Stack>
         <div>
           <TableContainer component={Paper}>

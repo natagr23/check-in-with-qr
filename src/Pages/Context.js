@@ -24,18 +24,18 @@ export const ContextProvider = (props) => {
     ]
   );
 
-  useEffect(() => {
-    setEmployeeList([
-      {
-        name: 'Natalia',
-        email: 'nata555@hotmail.com',
-      },
-      {
-        name: 'Jorge',
-        email: 'jorge555@hotmail.com',
-      },
-    ]);
-  }, []);
+  // useEffect(() => {
+  //   setEmployeeList([
+  //     {
+  //       name: 'Natalia',
+  //       email: 'nata555@hotmail.com',
+  //     },
+  //     {
+  //       name: 'Jorge',
+  //       email: 'jorge555@hotmail.com',
+  //     },
+  //   ]);
+  // }, []);
 
   const updateEmployeeList = (data) => {
     setEmployeeList(() => data);
@@ -60,9 +60,25 @@ export const ContextProvider = (props) => {
     setEmployeeList([...employeeList, { name: newName, email: newEmail }]);
   };
 
+  const addNewOfficeLocation = (newName, newId) => {
+    setOfficeLocationList([
+      ...officeLocationList,
+      { name: newName, id: newId },
+    ]);
+  };
+
+  const addNewemployeePerOffice = (newOffice, newEmployee) => {
+    setEmployeePerOfficeList([
+      ...employeePerOfficeList,
+      { office: newOffice, employee: newEmployee },
+    ]);
+  };
+
   return (
     <Context.Provider
       value={{
+        addNewemployeePerOffice: addNewemployeePerOffice,
+        addNewOfficeLocation: addNewOfficeLocation,
         addNewEmployee: addNewEmployee,
         updateEmployeePerOfficeList: updateEmployeePerOfficeList,
         updateofficeLocationList: updateOfficeLocationList,
