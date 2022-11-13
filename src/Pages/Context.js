@@ -8,15 +8,21 @@ export const ContextProvider = (props) => {
   const [timeActive, setTimeActive] = useState(false);
   const [employeeList, setEmployeeList] = useLocalStorage('employeeList', []);
 
-  const [officeLocationList, setOfficeLocationList] = useLocalStorage([
-    { name: 'Bogota', id: '4544444' },
-    { name: 'Bucaramanga', id: '6755555' },
-  ]);
-  const [employeePerOfficeList, setEmployeePerOfficeList] = useLocalStorage([
-    { office: 'Bogota', employee: 'Natalia' },
-    { office: 'Bucaramanga', employee: 'Natalia' },
-    { office: 'Bucaramanga', employee: 'Jorge' },
-  ]);
+  const [officeLocationList, setOfficeLocationList] = useLocalStorage(
+    'officeLocationList',
+    [
+      { name: 'Bogota', id: '4544444' },
+      { name: 'Bucaramanga', id: '6755555' },
+    ]
+  );
+  const [employeePerOfficeList, setEmployeePerOfficeList] = useLocalStorage(
+    'employeePerOfficeList',
+    [
+      { office: 'Bogota', employee: 'Natalia' },
+      { office: 'Bucaramanga', employee: 'Natalia' },
+      { office: 'Bucaramanga', employee: 'Jorge' },
+    ]
+  );
 
   useEffect(() => {
     setEmployeeList([
@@ -31,6 +37,17 @@ export const ContextProvider = (props) => {
     ]);
   }, []);
 
+  const updateEmployeeList = (data) => {
+    setEmployeeList(() => data);
+  };
+
+  const updateOfficeLocationList = (data) => {
+    setOfficeLocationList(() => data);
+  };
+
+  const updateEmployeePerOfficeList = (data) => {
+    setEmployeePerOfficeList(() => data);
+  };
   const updateUser = () => {
     setCurrentUser(2);
   };
@@ -42,6 +59,12 @@ export const ContextProvider = (props) => {
   return (
     <Context.Provider
       value={{
+        updateEmployeePerOfficeList: updateEmployeePerOfficeList,
+        updateofficeLocationList: updateOfficeLocationList,
+        updateEmployeeList: updateEmployeeList,
+        employeePerOfficeList: employeePerOfficeList,
+        officeLocationList: officeLocationList,
+        employeeList: employeeList,
         currentUser: currentUser,
         updateUser: updateUser,
         timeActive: timeActive,

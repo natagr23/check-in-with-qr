@@ -109,33 +109,37 @@ export default function AdminAccount() {
         </Stack>
         <div>
           <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Employee Name</TableCell>
-                  <TableCell>Identification</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>{'name'}</TableCell>
-                  <TableCell>{'Identification'}</TableCell>
+            <TableHead>
+              <TableRow>
+                <TableCell>Nombre del Empleado</TableCell>
+                <TableCell>Identificacion</TableCell>
+              </TableRow>
+            </TableHead>
+            {ctx.employeeList.map((employee) => {
+              return (
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{employee.name}</TableCell>
+                      <TableCell>{employee.email}</TableCell>
 
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="error"
-                      // onClick={handleDelete}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          color="error"
+                          // onClick={handleDelete}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              );
+            })}
           </TableContainer>
         </div>
         <Typography variant="h6" noWrap component="div">
@@ -175,33 +179,37 @@ export default function AdminAccount() {
         </Stack>
         <div>
           <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nombre de la Sede</TableCell>
-                  <TableCell>Identificacion</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>{'name'}</TableCell>
-                  <TableCell>{'Identificacion'}</TableCell>
+            <TableHead>
+              <TableRow>
+                <TableCell>Nombre de la Sede</TableCell>
+                <TableCell>Identificacion</TableCell>
+              </TableRow>
+            </TableHead>
+            {ctx.officeLocationList.map((office) => {
+              return (
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{office.name}</TableCell>
+                      <TableCell>{office.id}</TableCell>
 
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="error"
-                      // onClick={handleDelete}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          color="error"
+                          // onClick={handleDelete}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              );
+            })}
           </TableContainer>
         </div>
         <Typography variant="h6" noWrap component="div">
@@ -241,33 +249,37 @@ export default function AdminAccount() {
         </Stack>
         <div>
           <TableContainer component={Paper}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Nombre del Empleado</TableCell>
-                  <TableCell>Nombre de la Sede</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                <TableRow>
-                  <TableCell>{'nombre Empleado'}</TableCell>
-                  <TableCell>{'Nombre Sede'}</TableCell>
+            <TableHead>
+              <TableRow>
+                <TableCell>Nombre de la Sede</TableCell>
+                <TableCell>Nombre del Empleado</TableCell>
+              </TableRow>
+            </TableHead>
+            {ctx.employeePerOfficeList.map((employeePerOffice) => {
+              return (
+                <Table>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{employeePerOffice.office}</TableCell>
+                      <TableCell>{employeePerOffice.employee}</TableCell>
 
-                  <TableCell>
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      color="error"
-                      // onClick={handleDelete}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                  <TableCell></TableCell>
-                  <TableCell></TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
+                      <TableCell>
+                        <Button
+                          variant="contained"
+                          type="submit"
+                          color="error"
+                          // onClick={handleDelete}
+                        >
+                          Delete
+                        </Button>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              );
+            })}
           </TableContainer>
         </div>
         {/* <GenerateQr /> */}
