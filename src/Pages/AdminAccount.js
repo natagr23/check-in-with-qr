@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Box, TextField } from '@mui/material';
 import { Context } from '../Pages/Context';
@@ -32,6 +32,9 @@ const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 export default function AdminAccount() {
   const [employees, setEmployees] = useState([]);
 
+  const refNameEmployee = useRef();
+  const refEmail = useRef();
+
   useEffect(() => {
     onSnapshot(q, (snapshot) => {
       setEmployees(
@@ -58,6 +61,11 @@ export default function AdminAccount() {
     ctx.currentUser = 1;
   };
 
+  const employeeHandler = (e) => {
+    e.preventDefault();
+    ctx.addNewEmployee(refNameEmployee.current.value, refEmail.current.value);
+  };
+
   useEffect(() => {
     navigate('/Pages/AdminAccount');
     ctx.currentUser = 2;
@@ -76,37 +84,46 @@ export default function AdminAccount() {
           Lista de Empleados
         </Typography>
         <Stack spacing={3}>
-          <TextField
-            minRows={1}
-            name="title"
-            // onChange={(e) => setProductName(e.target.value)}
-            // value={productName}
-            placeholder=""
-            variant="filled"
-            id="add Product"
-            label="Nombre del Empleado"
-          />
+          <form onSubmit={employeeHandler}>
+            <input
+              minRows={1}
+              name="title"
+              // onChange={(e) => setProductName(e.target.value)}
+              // value={productName}
+              ref={refNameEmployee}
+              placeholder="Nombre del Empleado"
+              variant="filled"
+              id="add Product"
+              label="Nombre del Empleado"
+            />
 
-          <TextField
-            minRows={1}
-            // onChange={(e) => setProductDescription(e.target.value)}
-            variant="filled"
-            placeholder=""
-            // value={productDescription}
-            label="Email del Empleado"
-          />
+            <input
+              minRows={1}
+              // onChange={(e) => setProductDescription(e.target.value)}
+              variant="filled"
+              ref={refEmail}
+              placeholder="Email del Empleado"
+              // value={productDescription}
+              label="Email del Empleado"
+            />
 
-          <Stack
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="baseline"
-            spacing={1}
-          >
-            <Button variant="contained" type="submit">
-              Add
-            </Button>
-          </Stack>
+            <Stack
+              direction="row"
+              justifyContent="flex-end"
+              alignItems="baseline"
+              spacing={1}
+            >
+              <Button
+                variant="contained"
+                type="submit"
+                onClick={employeeHandler}
+              >
+                Add
+              </Button>
+            </Stack>
+          </form>
         </Stack>
+
         <div>
           <TableContainer component={Paper}>
             <TableHead>
@@ -242,7 +259,11 @@ export default function AdminAccount() {
             alignItems="baseline"
             spacing={1}
           >
-            <Button variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              //  onClick={ctx.addNewEmployee}
+            >
               Add
             </Button>
           </Stack>

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect, useRef } from 'react';
 import useLocalStorage from '../Hooks/useLocalStorage';
 
 export const Context = createContext({});
@@ -56,9 +56,14 @@ export const ContextProvider = (props) => {
     setTimeActive(() => timeActive);
   };
 
+  const addNewEmployee = (newName, newEmail) => {
+    setEmployeeList([...employeeList, { name: newName, email: newEmail }]);
+  };
+
   return (
     <Context.Provider
       value={{
+        addNewEmployee: addNewEmployee,
         updateEmployeePerOfficeList: updateEmployeePerOfficeList,
         updateofficeLocationList: updateOfficeLocationList,
         updateEmployeeList: updateEmployeeList,
