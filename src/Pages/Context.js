@@ -20,8 +20,14 @@ export const ContextProvider = (props) => {
 
   useEffect(() => {
     setEmployeeList([
-      { name: 'Natalia', email: 'nata555@hotmail.com' },
-      { name: 'Jorge', email: 'jorge555@hotmail.com' },
+      {
+        name: 'Natalia',
+        email: 'nata555@hotmail.com',
+      },
+      {
+        name: 'Jorge',
+        email: 'jorge555@hotmail.com',
+      },
     ]);
   }, []);
 

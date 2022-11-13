@@ -1,18 +1,23 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Box, ListItem } from '@mui/material';
+import { Button, Box, TextField } from '@mui/material';
 import { Context } from '../Pages/Context';
 import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Locations from './Locations';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
 import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
 import { db } from '../Pages/Firebase';
-
 import { QRCodeSVG } from 'qrcode.react';
-import EmployeeCard from './EmployeeCard';
+// import EmployeeCard from './EmployeeCard';
 // import GenerateQr from './GenerateQr';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,18 +30,18 @@ const Item = styled(Paper)(({ theme }) => ({
 const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
-  // const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState([]);
 
-  // useEffect(() => {
-  //   onSnapshot(q, (snapshot) => {
-  //     setEmployees(
-  //       snapshot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         item: doc.data(),
-  //       }))
-  //     );
-  //   });
-  // }, []);
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      setEmployees(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          item: doc.data(),
+        }))
+      );
+    });
+  }, []);
   const ctx = useContext(Context);
   let navigate = useNavigate();
 
@@ -67,38 +72,222 @@ export default function AdminAccount() {
           alignItems: 'center',
         }}
       >
+        <Typography variant="h6" noWrap component="div">
+          Lista de Empleados
+        </Typography>
+        <Stack spacing={3}>
+          <TextField
+            minRows={1}
+            name="title"
+            // onChange={(e) => setProductName(e.target.value)}
+            // value={productName}
+            placeholder=""
+            variant="filled"
+            id="add Product"
+            label="Nombre del Empleado"
+          />
+
+          <TextField
+            minRows={1}
+            // onChange={(e) => setProductDescription(e.target.value)}
+            variant="filled"
+            placeholder=""
+            // value={productDescription}
+            label="Email del Empleado"
+          />
+
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="baseline"
+            spacing={1}
+          >
+            <Button variant="contained" type="submit">
+              Add
+            </Button>
+          </Stack>
+        </Stack>
+        <div>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Employee Name</TableCell>
+                  <TableCell>Identification</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{'name'}</TableCell>
+                  <TableCell>{'Identification'}</TableCell>
+
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      // onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        <Typography variant="h6" noWrap component="div">
+          Lista de Sedes
+        </Typography>
+        <Stack spacing={3}>
+          <TextField
+            minRows={1}
+            name="title"
+            // onChange={(e) => setProductName(e.target.value)}
+            // value={productName}
+            placeholder=""
+            variant="filled"
+            id="add Product"
+            label="Nombre de Ciudad de la Sede"
+          />
+
+          <TextField
+            minRows={1}
+            // onChange={(e) => setProductDescription(e.target.value)}
+            variant="filled"
+            placeholder=""
+            // value={productDescription}
+            label="Identificación de la Sede"
+          />
+
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="baseline"
+            spacing={1}
+          >
+            <Button variant="contained" type="submit">
+              Add
+            </Button>
+          </Stack>
+        </Stack>
+        <div>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nombre de la Sede</TableCell>
+                  <TableCell>Identificacion</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{'name'}</TableCell>
+                  <TableCell>{'Identificacion'}</TableCell>
+
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      // onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
+        <Typography variant="h6" noWrap component="div">
+          Lista de Sedes por Empleado
+        </Typography>
+        <Stack spacing={3}>
+          <TextField
+            minRows={1}
+            name="title"
+            // onChange={(e) => setProductName(e.target.value)}
+            // value={productName}
+            placeholder=""
+            variant="filled"
+            id="add Product"
+            label="Nombre del Empleado"
+          />
+
+          <TextField
+            minRows={1}
+            // onChange={(e) => setProductDescription(e.target.value)}
+            variant="filled"
+            placeholder=""
+            // value={productDescription}
+            label="Nombre de la Sede"
+          />
+
+          <Stack
+            direction="row"
+            justifyContent="flex-end"
+            alignItems="baseline"
+            spacing={1}
+          >
+            <Button variant="contained" type="submit">
+              Add
+            </Button>
+          </Stack>
+        </Stack>
+        <div>
+          <TableContainer component={Paper}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nombre del Empleado</TableCell>
+                  <TableCell>Nombre de la Sede</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>{'nombre Empleado'}</TableCell>
+                  <TableCell>{'Nombre Sede'}</TableCell>
+
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      // onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </div>
         {/* <GenerateQr /> */}
         <Typography variant="h6" noWrap component="div">
-          Sedes
+          Verificación de la Identificación del Empleado
         </Typography>
 
-        {/* <Stack spacing={2}>
-          {employees.map((employee) => {
-            return (
-              <EmployeeCard
-                key={employee.item.id}
-                empleado={employee.item.empleado}
-                id={employee.item.id}
-                latitud={employee.item.latitud}
-                longitud={employee.item.longitud}
-              />
-            );
-          })}
-        </Stack> */}
+        <Box>
+          <Grid container spacing={3}>
+            <Grid item xs={3}>
+              <Item> Empleado</Item>
 
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={4}>
-              <Item>Products List</Item>
-              {/* <Locations url={url} call_Url={call_Url} /> */}
-              {/* <Stack spacing={1}>
+              <Stack spacing={1}>
                 {employees.map((employee) => {
                   return (
                     <Button
                       key={employee.item.id}
-                      onClick={() => {
-                        call_Url(employee.item.latitude);
-                      }}
+                      // onClick={() => {
+                      //   call_Url(employee.item.latitude);
+                      // }}
                       variant="contained"
                       color="success"
                     >
@@ -107,11 +296,11 @@ export default function AdminAccount() {
                   );
                 })}
                 <div>{url}</div>
-              </Stack> */}
+              </Stack>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={3}>
               <Item>QR</Item>
-              {/* {employees.map((employee) => {
+              {employees.map((employee) => {
                 return (
                   <Item>
                     <QRCodeSVG
@@ -132,7 +321,25 @@ export default function AdminAccount() {
                     />
                   </Item>
                 );
-              })} */}
+              })}
+            </Grid>
+            <Grid item xs={6}>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Latitud</TableCell>
+                      <TableCell>Longitud</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>{'Latitud'}</TableCell>
+                      <TableCell>{'Longitud'}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
           </Grid>
         </Box>
@@ -148,4 +355,20 @@ export default function AdminAccount() {
       </Box>
     </>
   );
+}
+
+{
+  /* <Stack spacing={2}>
+          {employees.map((employee) => {
+            return (
+              <EmployeeCard
+                key={employee.item.id}
+                empleado={employee.item.empleado}
+                id={employee.item.id}
+                latitud={employee.item.latitud}
+                longitud={employee.item.longitud}
+              />
+            );
+          })}
+        </Stack> */
 }
