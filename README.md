@@ -18,7 +18,7 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 - LocalStorage
 
 ## Características
-- Fully Resposive
+- Resposive
 - Toda la información es guardada en el Local Storage
 
 ## Vistazo a la página web
@@ -46,14 +46,16 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 
 4.2. Lista de las Sedes
 -El administrador puede crear nuevas sedes, así como también eliminar sedes existentes.
+
 ![Locations List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/LocationList.PNG?raw=true)
 
 4.3. Tabla de Cruce de Sedes por Empleado  
 -Las tablas Lista de Empleados y Lista de Sedes existen si y sólo si, el administrador puede luego hacer un cruce entre sede y empleado. De esta forma el Autocomplete sólo permitirá que el administrador seleccione los empleados y sedes que esten contenidos en dichas tablas para evitar errores de gestión administrativa. Esta tabla de entrelazamiento sede-empleado será vital al momento de realizar la verificación de identificación del empleado y la sede que le corresponde.
+
 ![Junction List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/junctionEmployeewithLocation.PNG?raw=true)
 
 ## Deploy
-https://portafolio-carbon.vercel.app/
+https://check-in-with-qr.vercel.app/
 
 ## Prerequisites
 
