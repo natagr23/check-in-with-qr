@@ -33,18 +33,23 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 
 3. Cuenta del Empleado
 
+-Al ingresar el correo electrónico y contraseña, el empleado recibe una notificación donde se confirma la generación del código QR. Como se puede verificar en el código, se almacena el email logeado en un estado y se adiciona al enlace generado.A manera de ejemplo puede ser llamado dicho valor utilizando UseParams hook y es pintado en la consola.En el caso de que el Administrador quisiera implementar una lectura automática de todos los correos y luego por medio de una función Find() verificar si ese correo existe dentro de la base de datos, podría negar o permitir el acceso a un empleado a una sede determinada por la identificación única de dicho correo.
+
 ![Employee Account](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/EmployeeAccount.PNG?raw=true)
 
 4. Cuenta del Administrador
+
 4.1. Lista de los Empleados
+-El administrador puede crear nuevos empleados, así como también eliminar empleados existentes.
+
 ![Employee List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/EmployeeList.PNG?raw=true)
 
 4.2. Lista de las Sedes
-
+-El administrador puede crear nuevas sedes, así como también eliminar sedes existentes.
 ![Locations List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/LocationList.PNG?raw=true)
 
 4.3. Tabla de Cruce de Sedes por Empleado  
-
+-Las tablas Lista de Empleados y Lista de Sedes existen si y sólo si, el administrador puede luego hacer un cruce entre sede y empleado. De esta forma el Autocomplete sólo permitirá que el administrador seleccione los empleados y sedes que esten contenidos en dichas tablas para evitar errores de gestión administrativa. Esta tabla de entrelazamiento sede-empleado será vital al momento de realizar la verificación de identificación del empleado y la sede que le corresponde.
 ![Junction List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/junctionEmployeewithLocation.PNG?raw=true)
 
 ## Deploy
