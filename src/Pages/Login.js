@@ -54,12 +54,7 @@ function Login(props) {
     <div>
       <Toolbar />
       <Divider />
-      <ListItemButton
-        
-        color="primary"
-        component={Link}
-        onClick={handleGo}
-      >
+      <ListItemButton color="primary" component={Link} onClick={handleGo}>
         <ListItemIcon>
           <IconButton color="primary" component={Link} onClick={handleGo}>
             <EngineeringIcon />

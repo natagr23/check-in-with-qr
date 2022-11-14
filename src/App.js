@@ -28,6 +28,7 @@ function App() {
               path="/Pages/AdminAccount/:emailLink"
               element={[<AdminAccount />]}
             />
+            <Route path="/Pages/AdminAccount/" element={[<AdminAccount />]} />
             <Route
               path="/Pages/EmployeeAccount"
               element={[<EmployeeAccount />]}
