@@ -94,7 +94,7 @@ export const ContextProvider = (props) => {
     setEmployeePerOfficeList((prev) => {
       return prev.filter((locationPerEmployeeItem) => {
         const isSameLocationPerEmployee =
-          locationPerEmployeeItem.email === locationPerEmployee.email;
+          locationPerEmployeeItem.office === locationPerEmployee.office;
         return !isSameLocationPerEmployee;
       });
     });
