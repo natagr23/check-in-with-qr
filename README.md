@@ -67,7 +67,7 @@ First, [fork this repository](https://docs.github.com/en/get-started/quickstart/
 # Clone the starter code
 git clone https://github.com/<your-username>/check-in-with-qr.git 
 # Install the project's dependencies
-yarn
+yarn install
 ```
 ## Running the App
 
