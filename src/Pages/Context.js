@@ -81,6 +81,24 @@ export const ContextProvider = (props) => {
       });
     });
   };
+  const deleteLocation = (location) => {
+    setOfficeLocationList((prev) => {
+      return prev.filter((locationItem) => {
+        const isSameLocation = locationItem.id === location.id;
+        return !isSameLocation;
+      });
+    });
+  };
+
+  const deleteLocationPerEmployee = (locationPerEmployee) => {
+    setEmployeePerOfficeList((prev) => {
+      return prev.filter((locationPerEmployeeItem) => {
+        const isSameLocationPerEmployee =
+          locationPerEmployeeItem.email === locationPerEmployee.email;
+        return !isSameLocationPerEmployee;
+      });
+    });
+  };
 
   const addNewEmail = (newEmail) => {
     setEmailList([...emailList, { email: newEmail }]);
@@ -89,6 +107,8 @@ export const ContextProvider = (props) => {
   return (
     <Context.Provider
       value={{
+        deleteLocationPerEmployee: deleteLocationPerEmployee,
+        deleteLocation: deleteLocation,
         loggedEmployeeEmail: loggedEmployeeEmail,
         deleteEmployee: deleteEmployee,
         addNewEmail: addNewEmail,

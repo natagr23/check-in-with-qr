@@ -197,9 +197,9 @@ export default function AdminAccount() {
                       variant="contained"
                       type="submit"
                       color="error"
-                      // onClick={() => {
-                      //   ctx.deleteEmployee(employee);
-                      // }}
+                      onClick={() => {
+                        ctx.deleteLocation(office);
+                      }}
                     >
                       Delete
                     </Button>
@@ -282,9 +282,9 @@ export default function AdminAccount() {
                         variant="contained"
                         type="submit"
                         color="error"
-                        // onClick={() => {
-                        //   ctx.deleteEmployee(employee);
-                        // }}
+                        onClick={() => {
+                          ctx.deleteLocationPerEmployee(employeePerOffice);
+                        }}
                       >
                         Delete
                       </Button>
