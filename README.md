@@ -55,7 +55,7 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 ![Junction List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/junctionEmployeewithLocation.PNG?raw=true)
 
 ## Deploy
-https://portafolio-carbon.vercel.app/
+https://check-in-with-qr.vercel.app/
 
 ## Prerequisites
 
