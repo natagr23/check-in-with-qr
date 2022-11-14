@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Check-in with QR
+
+<h2 align="center">Aplicación para gestionar la entrada de empleados mediante el uso de códigos QR</h2>
+<h2 align="center">App to manage employee entry by using QR code</h2>
+
+## Author
+- [@Natalia-García](https://github.com/natagr23)
+
+## Descripción
+Esta aplicación permite al usuario empleado generar un código QR correspondiente a un enlace con la información de su identificación o correo electrónico al igual que obtener su localización al momento de acceder a su cuenta. El usuario administrador tiene la posibilidad de adicionar empleados a los ya existentes, adicionar sedes y generar una tabla donde entrelace o correlacione cada empleado existente a una sede existente. Por medio de la información anterior el administrador podrá verificar por medio de la lectura del código QR un E-mail único de cada empleado y si éste se encuentra en la base de datos existente.De igual forma el administrador podrá verificar si la ubicación obtenida esta cerca de alguna sede existente designada a dicho empleado.
+
+## Tecnologías implementadas
+- Node.js
+- React
+- Material UI
+- React Context 
+- Hooks: UseLocalStorage
+- LocalStorage
+
+## Características
+- Fully Resposive
+- Toda la información es guardada en el Local Storage
+
+## Vistazo a la página web
+
+1. Langing Page
+
+![Landing Page](https://github.com/ManishSinghBhadouria/api/blob/gh-pages/Booking11/Homepage.png?raw=true)
+
+## Deploy
+https://portafolio-carbon.vercel.app/
+
+## Prerequisites
+
+## Setup
+
+First, [fork this repository](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+
+```bash
+# Clone the starter code
+git clone https://github.com/<your-username>/check-in-with-qr.git 
+# Install the project's dependencies
+yarn
+```
+## Running the App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+To run the app, run:
 
-In the project directory, you can run:
-
-### `yarn start`
-
+```bash
+yarn start
+```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
