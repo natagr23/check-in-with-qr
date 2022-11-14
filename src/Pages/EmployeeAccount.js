@@ -43,13 +43,6 @@ export default function EmployeeAccount() {
           alignItems: 'center',
         }}
       >
-        {/* <GenerateQr /> */}
-
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-
         <Stack sx={{ width: '60%' }} spacing={2}>
           <Typography variant="h6" color="initial">
             {location}
@@ -63,7 +56,7 @@ export default function EmployeeAccount() {
             // value={
             //   'https://www.google.com/search?client=firefox-b-d&q=ctx.+is+not+a+function'
             // }
-            size={400}
+            size={300}
             bgColor={'#ffffff'}
             fgColor={'#000000'}
             level={'L'}

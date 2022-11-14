@@ -54,41 +54,11 @@ export default function Admin() {
 
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   navigate('/Pages/AdminAccount');
-  //   ctx.currentUser = 1;
-  // }, [ctx, navigate]);
-
   const handleSubmit = (event) => {
     event.preventDefault();
     ctx.currentUser = 1;
     console.log(ctx.currentUser);
     navigate('/Pages/AdminAccount');
-    // signInWithEmailAndPassword(auth, email, password)
-    //   .then((response) => {
-    //     if (auth.currentUser.emailVerified) {
-    //       navigate('/components/Account/Account');
-    //     }
-    //     if (!auth.currentUser.emailVerified) {
-    //       sendEmailVerification(auth.currentUser)
-    //         .then(() => {
-    //           // ctx.updateTimeActive(500);
-    //           navigate('/verify-email');
-    //         })
-
-    //         .catch((err) => alert(err.message));
-    //     } else {
-    //       navigate('/components/Home/Home');
-    //     }
-    //   })
-    // .catch((error) => {
-    //   if (error.code === 'auth/wrong-password') {
-    //     toast.error('Please check the Password');
-    //   }
-    //   if (error.code === 'auth/user-not-found') {
-    //     toast.error('Please check the Email');
-    //   }
-    // });
   };
 
   return (
