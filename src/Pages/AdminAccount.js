@@ -14,11 +14,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Autocomplete from '@mui/material/Autocomplete';
-import { collection, query, orderBy, onSnapshot } from 'firebase/firestore';
-import { db } from '../Pages/Firebase';
-
-// import EmployeeCard from './EmployeeCard';
-// import GenerateQr from './GenerateQr';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -27,34 +22,24 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-const q = query(collection(db, 'todos'), orderBy('timestamp', 'desc'));
 
 export default function AdminAccount() {
   const ctx = useContext(Context);
-  const [employees, setEmployees] = useState([]);
   const [newEmployeeName, setNewEmployeeName] = useState('');
   const [newEmployeeEmail, setNewEmployeeEmail] = useState('');
+  const [newLocationName, setNewLocationName] = useState('');
+  const [newIdLocation, setNewIdLocation] = useState('');
   const [selectedLocation, setSelectedLocation] = useState(
     ctx.officeLocationList[0]
   );
   const [selectedEmployee, setSelectedEmployee] = useState(ctx.employeeList[0]);
 
-  const refNameLocation = useRef();
-  const refLocationId = useRef();
   const { emailLink } = useParams();
   useEffect(() => {
     console.log(emailLink);
   }, [emailLink]);
 
   let navigate = useNavigate();
-
-  const [url, setUrl] = useState(
-    'https://picturesofpeoplescanningqrcodes.tumblr.com/'
-  );
-
-  const call_Url = (product) => {
-    setUrl(product.url);
-  };
 
   const handleLogout = () => {
     navigate('/');
@@ -68,10 +53,7 @@ export default function AdminAccount() {
 
   const officeLocationHandler = (e) => {
     e.preventDefault();
-    ctx.addNewOfficeLocation(
-      refNameLocation.current.value,
-      refLocationId.current.value
-    );
+    ctx.addNewOfficeLocation(newLocationName, newIdLocation);
   };
 
   //escribo name porque el autocomplete me guarda el objeto seleccionado
@@ -91,8 +73,6 @@ export default function AdminAccount() {
       alignItems="center"
       sx={{
         marginLeft: 40,
-        // display: 'flex',
-        // flexDirection: 'column',
         maxWidth: '70%',
       }}
     >
@@ -161,28 +141,25 @@ export default function AdminAccount() {
       <Typography variant="h6" noWrap component="div">
         Lista de Sedes
       </Typography>
-      <Stack spacing={3}>
-        <form onSubmit={officeLocationHandler}>
-          <input
-            name="title"
-            // onChange={(e) => setProductName(e.target.value)}
-            // value={productName}
-            ref={refNameLocation}
-            placeholder="Nombre de Ciudad de la Sede"
-            variant="filled"
-            id="add Product"
-            label="Nombre de Ciudad de la Sede"
-          />
+      <Stack direction="row" spacing={3}>
+        <TextField
+          name="title"
+          onChange={(e) => setNewLocationName(e.target.value)}
+          value={newLocationName}
+          placeholder="Nombre de Ciudad de la Sede"
+          variant="filled"
+          id="add Product"
+          label="Nombre de Ciudad de la Sede"
+        />
 
-          <input
-            // onChange={(e) => setProductDescription(e.target.value)}
-            variant="filled"
-            ref={refLocationId}
-            placeholder="Identificacción de la Sede"
-            // value={productDescription}
-            label="Identificacción de la Sede"
-          />
-        </form>
+        <TextField
+          variant="filled"
+          placeholder="Identificacción de la Sede"
+          value={newIdLocation}
+          onChange={(e) => setNewIdLocation(e.target.value)}
+          label="Identificacción de la Sede"
+        />
+
         <Stack
           direction="row"
           justifyContent="flex-end"
@@ -198,57 +175,47 @@ export default function AdminAccount() {
           </Button>
         </Stack>
       </Stack>
-      <div>
-        <TableContainer component={Paper}>
-          <TableHead>
-            <TableRow>
-              <TableCell>Nombre de la Sede</TableCell>
-              <TableCell>Identificacion</TableCell>
-            </TableRow>
-          </TableHead>
-          {ctx.officeLocationList.map((office) => {
-            return (
-              <Table>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>{office.name}</TableCell>
-                    <TableCell>{office.id}</TableCell>
 
-                    <TableCell>
-                      <Button
-                        variant="contained"
-                        type="submit"
-                        color="error"
-                        // onClick={handleDelete}
-                      >
-                        Delete
-                      </Button>
-                    </TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            );
-          })}
-        </TableContainer>
-      </div>
+      <TableContainer component={Paper}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Nombre de la Sede</TableCell>
+            <TableCell>Identificacion</TableCell>
+            <TableCell></TableCell>
+          </TableRow>
+        </TableHead>
+        <Table>
+          <TableBody>
+            {ctx.officeLocationList.map((office) => {
+              return (
+                <TableRow key={office.id}>
+                  <TableCell>{office.name}</TableCell>
+                  <TableCell>{office.id}</TableCell>
+
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      type="submit"
+                      color="error"
+                      // onClick={() => {
+                      //   ctx.deleteEmployee(employee);
+                      // }}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
       <Typography variant="h6" noWrap component="div">
         Lista de Sedes por Empleado
       </Typography>
-      <Stack spacing={3}>
+      <Stack spacing={5}>
         <form onSubmit={officeLocationPerEmployeeHandler}>
-          {/* <input
-            name="title"
-            ref={refNameLocationPerEmployee}
-            // onChange={(e) => setProductName(e.target.value)}
-            // value={productName}
-            placeholder="Nombre de la Sede"
-            variant="filled"
-            id="add Product"
-            label="Nombre de la Sede"
-          /> */}
-
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -299,13 +266,14 @@ export default function AdminAccount() {
             <TableRow>
               <TableCell>Nombre de la Sede</TableCell>
               <TableCell>Nombre del Empleado</TableCell>
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
-          {ctx.employeePerOfficeList.map((employeePerOffice) => {
-            return (
-              <Table>
-                <TableBody>
-                  <TableRow>
+          <Table>
+            <TableBody>
+              {ctx.employeePerOfficeList.map((employeePerOffice) => {
+                return (
+                  <TableRow key={employeePerOffice.employee}>
                     <TableCell>{employeePerOffice.office}</TableCell>
                     <TableCell>{employeePerOffice.employee}</TableCell>
 
@@ -314,18 +282,18 @@ export default function AdminAccount() {
                         variant="contained"
                         type="submit"
                         color="error"
-                        // onClick={handleDelete}
+                        // onClick={() => {
+                        //   ctx.deleteEmployee(employee);
+                        // }}
                       >
                         Delete
                       </Button>
                     </TableCell>
-                    <TableCell></TableCell>
-                    <TableCell></TableCell>
                   </TableRow>
-                </TableBody>
-              </Table>
-            );
-          })}
+                );
+              })}
+            </TableBody>
+          </Table>
         </TableContainer>
       </div>
 

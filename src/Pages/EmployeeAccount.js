@@ -53,9 +53,6 @@ export default function EmployeeAccount() {
           <QRCodeSVG
             renderAs="svg"
             value={`http://localhost:3000/Pages/AdminAccount?emailLink=${ctx.loggedEmployeeEmail}`}
-            // value={
-            //   'https://www.google.com/search?client=firefox-b-d&q=ctx.+is+not+a+function'
-            // }
             size={300}
             bgColor={'#ffffff'}
             fgColor={'#000000'}
