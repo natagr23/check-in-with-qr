@@ -25,7 +25,27 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 
 1. Langing Page
 
-![Landing Page](https://github.com/ManishSinghBhadouria/api/blob/gh-pages/Booking11/Homepage.png?raw=true)
+![Landing Page](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/LandingPage.PNG?raw=true)
+
+2. Login o Acceso para el Empleado
+
+![Employee Login](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/EmployeeLogin.PNG?raw=true)
+
+3. Cuenta del Empleado
+
+![Employee Account](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/EmployeeAccount.PNG?raw=true)
+
+4. Cuenta del Administrador
+4.1. Lista de los Empleados
+![Employee List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/EmployeeList.PNG?raw=true)
+
+4.2. Lista de las Sedes
+
+![Locations List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/LocationList.PNG?raw=true)
+
+4.3. Tabla de Cruce de Sedes por Empleado  
+
+![Junction List](https://github.com/natagr23/check-in-with-qr/blob/main/src/Data/junctionEmployeewithLocation.PNG?raw=true)
 
 ## Deploy
 https://portafolio-carbon.vercel.app/
