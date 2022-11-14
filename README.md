@@ -18,7 +18,7 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 - LocalStorage
 
 ## Características
-- Fully Resposive
+- Resposive
 - Toda la información es guardada en el Local Storage
 
 ## Vistazo a la página web
