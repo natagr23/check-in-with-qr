@@ -14,6 +14,7 @@ Esta aplicación permite al usuario empleado generar un código QR correspondien
 - React
 - Material UI
 - React Context 
+- React Router 
 - Hooks: UseLocalStorage
 - LocalStorage
 
